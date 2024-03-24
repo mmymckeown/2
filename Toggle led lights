@@ -1,0 +1,35 @@
+// Define LED objects
+DigitalOut led1(LED1);
+DigitalOut led2(LED2);
+
+// Define timers
+Timer timer1;
+Timer timer2;
+
+// Define intervals in milliseconds
+const int interval1 = 2000; // 2 seconds
+const int interval2 = 5000; // 5 seconds
+
+int main() {
+    // Start the timers
+    timer1.start();
+    timer2.start();
+
+    while (1) {
+        // Check if it's time to toggle LED1
+        if (timer1.read_ms() >= interval1) {
+            led1 = !led1; // Toggle LED1
+            timer1.reset(); // Reset the timer
+        }
+
+        // Check if it's time to toggle LED2
+        if (timer2.read_ms() >= interval2) {
+            led2 = !led2; // Toggle LED2
+            timer2.reset(); // Reset the timer
+        }
+
+        // Optional: You can add a wait statement here to reduce CPU usage
+        // This will make the program more power efficient, but slightly less precise in timing
+        // wait_ms(1);
+    }
+}
